@@ -1,0 +1,49 @@
+@startuml ClassDiagram
+
+interface IAirplane {
+  + {abstract} GetName() : string
+  + {abstract} GetCapacity() : int
+}
+
+interface IPerson {
+  + {abstract} GetName() : string
+  + {abstract} GetGender() : EGender
+}
+
+class CBoeing737
+class CAirbusA320
+
+class CFlight {
+  +GetFlightNumber() : string
+  +GetDepartureTime()
+  +GetArrivalTime()
+  +GetDeperatureAirport()
+  +GetArrivalAirport()
+  +SetAirplane(IAirplane)
+}
+
+class CPassenger {
+  +NeedsAssistance() : bool
+}
+
+class CCrewMember {
+  +GetPersonelNumber() : int
+}
+
+class CAirport {
+  +GetName() : string
+}
+
+enum EGender
+
+IAirplane <|-- CBoeing737
+IAirplane <|-- CAirbusA320
+IPerson <|-- CCrewMember
+IPerson <|-- CPassenger
+
+CFlight o-- IAirplane
+CFlight "1" *-- "*" CCrewMember
+CFlight "1" *-- "*" CPassenger
+CFlight "1" *-- "2" CAirport
+
+@enduml
